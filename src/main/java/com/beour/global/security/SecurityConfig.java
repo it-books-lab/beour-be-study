@@ -67,7 +67,7 @@ public class SecurityConfig {
                 .permitAll()
 
                 // all - 공간 검색 및 이용가능 시간
-                .requestMatchers("/api/spaces/*/available-times/date", "/api/reviews/new",
+                .requestMatchers("/api/users/banners", "/api/spaces/*/available-times/date", "/api/reviews/new",
                     "/api/spaces/nearby", "/api/spaces/keyword", "/api/spaces/filter",
                     "/api/spaces/spacecategory", "/api/spaces/usecategory", "/api/spaces/new")
                 .permitAll()

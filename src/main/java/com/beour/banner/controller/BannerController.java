@@ -36,7 +36,7 @@ public class BannerController {
         return ApiResponse.ok(bannerService.getBannerList());
     }
 
-    @GetMapping("/api/banners")
+    @GetMapping("/api/users/banners")
     public ApiResponse<List<BannerListForUserResponseDto>> userGetBannerList() {
         return ApiResponse.ok(bannerService.getBannerListForUser());
     }
