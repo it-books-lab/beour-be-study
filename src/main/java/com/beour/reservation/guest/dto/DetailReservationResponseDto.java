@@ -17,7 +17,7 @@ public class DetailReservationResponseDto {
     private String guestName;
     private String guestPhoneNumber;
     private String spaceName;
-    private String spacePhoneNumber;
+    private String hostPhoneNumber;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -29,14 +29,14 @@ public class DetailReservationResponseDto {
 
     @Builder
     private DetailReservationResponseDto(Long reservationId, String guestName,
-        String guestPhoneNumber, String spaceName, String spacePhoneNumber, LocalDate date,
+        String guestPhoneNumber, String spaceName, String hostPhoneNumber, LocalDate date,
         LocalTime startTime, LocalTime endTime, int price, int guestCount, ReservationStatus status,
         UsagePurpose usagePurpose, String requestMessage) {
         this.reservationId = reservationId;
         this.guestName = guestName;
         this.guestPhoneNumber = guestPhoneNumber;
         this.spaceName = spaceName;
-        this.spacePhoneNumber = spacePhoneNumber;
+        this.hostPhoneNumber = hostPhoneNumber;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -53,7 +53,7 @@ public class DetailReservationResponseDto {
             .guestName(reservation.getGuest().getName())
             .guestPhoneNumber(reservation.getGuest().getPhone())
             .spaceName(reservation.getSpace().getName())
-            .spacePhoneNumber(reservation.getHost().getPhone())
+            .hostPhoneNumber(reservation.getHost().getPhone())
             .date(reservation.getDate())
             .startTime(reservation.getStartTime())
             .endTime(reservation.getEndTime())
