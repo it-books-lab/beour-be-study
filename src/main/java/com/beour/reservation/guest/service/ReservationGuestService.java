@@ -12,6 +12,7 @@ import com.beour.global.exception.exceptionType.AvailableTimeNotFound;
 import com.beour.global.exception.exceptionType.MissMatch;
 import com.beour.global.exception.exceptionType.ReservationNotFound;
 import com.beour.reservation.commons.repository.ReservationRepository;
+import com.beour.reservation.guest.dto.DetailReservationResponseDto;
 import com.beour.reservation.guest.dto.ReservationCreateRequest;
 import com.beour.reservation.guest.dto.ReservationListPageResponseDto;
 import com.beour.reservation.guest.dto.ReservationListResponseDto;
@@ -132,6 +133,14 @@ public class ReservationGuestService {
         }
     }
 
+    public DetailReservationResponseDto getReservationDetailInformation(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(
+            () -> new ReservationNotFound(ReservationErrorCode.RESERVATION_NOT_FOUND)
+        );
+
+        return DetailReservationResponseDto.of(reservation);
+    }
+
     public ReservationListPageResponseDto findReservationList(Pageable pageable) {
         User guest = findUserFromToken();
         Page<Reservation> reservationList = reservationRepository.findUpcomingReservationsByGuest(
@@ -148,7 +157,8 @@ public class ReservationGuestService {
             reservationList.getTotalPages());
     }
 
-    public ReservationListPageResponseDto getCanceledReservations(Pageable pageable, ReservationStatus status) {
+    public ReservationListPageResponseDto getCanceledReservations(Pageable pageable,
+        ReservationStatus status) {
         User guest = findUserFromToken();
         Page<Reservation> reservationList = reservationRepository.findByGuestIdAndStatus(
             guest.getId(), status, pageable);
