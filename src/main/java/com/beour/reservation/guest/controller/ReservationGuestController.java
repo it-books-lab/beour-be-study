@@ -1,6 +1,7 @@
 package com.beour.reservation.guest.controller;
 
 import com.beour.global.response.ApiResponse;
+import com.beour.reservation.commons.enums.ReservationStatus;
 import com.beour.reservation.guest.dto.ReservationCreateRequest;
 import com.beour.reservation.guest.dto.ReservationListPageResponseDto;
 import com.beour.reservation.guest.dto.ReservationResponseDto;
@@ -51,6 +52,12 @@ public class ReservationGuestController {
     public ApiResponse<ReservationListPageResponseDto> checkPastReservationList(
         @PageableDefault(size = 10) Pageable pageable) {
         return ApiResponse.ok(reservationGuestService.findPastReservationList(pageable));
+    }
+
+    @GetMapping("/api/reservations/status")
+    public ApiResponse<ReservationListPageResponseDto> getCanceledReservations(
+        @RequestParam("status")ReservationStatus reservationStatus, @PageableDefault(size = 10) Pageable pageable) {
+        return ApiResponse.ok(reservationGuestService.getCanceledReservations(pageable, reservationStatus));
     }
 
     @DeleteMapping("/api/reservations/{reservationId}")

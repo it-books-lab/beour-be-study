@@ -89,7 +89,7 @@ public class SecurityConfig {
 
                 // guest - 예약
                 .requestMatchers("/api/spaces/*/reservations", "/api/reservations/current",
-                    "/api/reservations/past", "/api/reservations/*").hasRole("GUEST")
+                    "/api/reservations/past", "/api/reservations/status", "/api/reservations/*").hasRole("GUEST")
 
                 // guest - 리뷰
                 .requestMatchers("/api/users/me/reviewable-reservations", "/api/users/me/reviews",

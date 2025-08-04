@@ -653,4 +653,52 @@ class ReservationGuestControllerTest {
 
         assertEquals(ReservationStatus.REJECTED, reservation.getStatus());
     }
+
+    @Test
+    @Transactional
+    @DisplayName("취소된 예약 조회 - 성공")
+    void success_get_canceled_reservations() throws Exception {
+        //given
+        Reservation reservation = Reservation.builder()
+            .guest(guest)
+            .host(host)
+            .space(space)
+            .status(ReservationStatus.REJECTED)
+            .usagePurpose(UsagePurpose.BARISTA_TRAINING)
+            .requestMessage("테슽뚜")
+            .date(LocalDate.now().plusDays(1))
+            .startTime(LocalTime.of(13, 0, 0))
+            .endTime(LocalTime.of(14, 0, 0))
+            .price(15000)
+            .guestCount(2)
+            .build();
+        reservationRepository.save(reservation);
+
+        //when  then
+        mockMvc.perform(get("/api/reservations/status")
+                .header("Authorization", "Bearer " + accessToken)
+                .param("status", ReservationStatus.REJECTED.name())
+                .param("page", "0")
+            )
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.data.reservations[0].reservationId").value(reservation.getId()))
+            .andExpect(jsonPath("$.data.reservations[0].spaceName").value(space.getName()))
+            .andExpect(jsonPath("$.data.reservations[0].status").value("REJECTED"))
+        ;
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("취소된 예약 조회 - 취소한 예약 없을 경우")
+    void get_canceled_reservations_reservations_not_found() throws Exception {
+        //when  then
+        mockMvc.perform(get("/api/reservations/status")
+                .header("Authorization", "Bearer " + accessToken)
+                .param("status", ReservationStatus.REJECTED.name())
+                .param("page", "0")
+            )
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.message").value(ReservationErrorCode.RESERVATION_NOT_FOUND.getMessage()))
+        ;
+    }
 }

@@ -148,6 +148,22 @@ public class ReservationGuestService {
             reservationList.getTotalPages());
     }
 
+    public ReservationListPageResponseDto getCanceledReservations(Pageable pageable, ReservationStatus status) {
+        User guest = findUserFromToken();
+        Page<Reservation> reservationList = reservationRepository.findByGuestIdAndStatus(
+            guest.getId(), status, pageable);
+
+        checkEmptyReservation(reservationList);
+
+        List<ReservationListResponseDto> responseDtoList = new ArrayList<>();
+        for (Reservation reservation : reservationList) {
+            responseDtoList.add(ReservationListResponseDto.of(reservation));
+        }
+
+        return new ReservationListPageResponseDto(responseDtoList, reservationList.isLast(),
+            reservationList.getTotalPages());
+    }
+
     @Transactional
     public ReservationListPageResponseDto findPastReservationList(Pageable pageable) {
         User user = findUserFromToken();
