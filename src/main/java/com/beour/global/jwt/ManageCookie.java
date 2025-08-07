@@ -28,11 +28,7 @@ public class ManageCookie {
         cookie.append("HttpOnly; ");
         cookie.append("SameSite=None; ");
         cookie.append("Domain=beour.store; ");
-
-        if (isSecure) {
-            log.info("isSecure : " + isSecure);
-            cookie.append("Secure;");
-        }
+        cookie.append("Secure;");
 
         response.addHeader("Set-Cookie", cookie.toString());
     }
