@@ -1,8 +1,9 @@
 package com.beour.global.jwt;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ManageCookie {
 //    public static Cookie createCookie(String key, String value) {
 //        Cookie cookie = new Cookie(key, value);
@@ -26,13 +27,13 @@ public class ManageCookie {
         cookie.append("Max-Age=").append(maxAge).append("; ");
         cookie.append("HttpOnly; ");
         cookie.append("SameSite=None; ");
+        cookie.append("Domain=beour.store; ");
 
         if (isSecure) {
+            log.info("isSecure : " + isSecure);
             cookie.append("Secure;");
         }
 
         response.addHeader("Set-Cookie", cookie.toString());
     }
-
-
 }
