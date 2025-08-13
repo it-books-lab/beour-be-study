@@ -67,7 +67,7 @@ public class SecurityConfig {
                 .permitAll()
 
                 // all - 공간 검색 및 이용가능 시간
-                .requestMatchers("/api/users/banners", "/api/spaces/*/available-times/date", "/api/reviews/new",
+                .requestMatchers("/api/users/banners", "/api/spaces/*", "/api/spaces/*/available-times/date", "/api/reviews/new",
                     "/api/spaces/nearby", "/api/spaces/keyword", "/api/spaces/filter",
                     "/api/spaces/spacecategory", "/api/spaces/usecategory", "/api/spaces/new")
                 .permitAll()
@@ -78,7 +78,7 @@ public class SecurityConfig {
                     "/api/spaces/reservations").hasRole("HOST")
 
                 //host - 공간
-                .requestMatchers("/api/spaces", "/api/spaces/*/simple", "/api/spaces/*",
+                .requestMatchers("/api/spaces", "/api/spaces/*/simple",
                     "/api/spaces/*/basic", "/api/spaces/*/description", "/api/spaces/*/tags",
                     "/api/spaces/*/images", "/api/spaces/*/available-times").hasRole("HOST")
 
