@@ -6,6 +6,8 @@ import com.beour.banner.dto.CreateBannerRequestDto;
 import com.beour.banner.dto.CreateBannerResponseDto;
 import com.beour.banner.entity.Banner;
 import com.beour.banner.repository.BannerRepository;
+import com.beour.global.exception.error.errorcode.BannerErrorCode;
+import com.beour.global.exception.exceptionType.BannerNotFoundException;
 import com.beour.global.file.ImageUploader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -45,7 +47,7 @@ public class BannerService {
         List<Banner> banners = bannerRepository.findAll();
 
         if(banners.isEmpty()){
-            throw new IllegalStateException("조회된 배너가 없습니다.");
+            throw new BannerNotFoundException(BannerErrorCode.BANNER_NOT_EXIST);
         }
 
         return banners.stream()
@@ -58,7 +60,7 @@ public class BannerService {
         List<Banner> banners = bannerRepository.findValidBanners(LocalDate.now());
 
         if(banners.isEmpty()){
-            throw new IllegalStateException("조회된 배너가 없습니다.");
+            throw new BannerNotFoundException(BannerErrorCode.BANNER_NOT_EXIST);
         }
 
         return banners.stream()
