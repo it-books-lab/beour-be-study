@@ -19,8 +19,8 @@ public class SpaceDetailResponseDto {
     private String detailAddress;
     private int pricePerHour;
     private int maxCapacity;
-    private SpaceCategory spaceCategory;
-    private UseCategory useCategory;
+    private String spaceCategory;
+    private String useCategory;
     private Double avgRating;
     private String thumbnailUrl;
 

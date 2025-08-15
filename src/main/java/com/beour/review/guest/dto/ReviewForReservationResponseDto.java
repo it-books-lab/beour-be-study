@@ -21,7 +21,7 @@ public class ReviewForReservationResponseDto {
     private LocalTime startTime;
     private LocalTime endTime;
     private int guestCount;
-    private UsagePurpose usagePurpose;
+    private String usagePurpose;
 
     public static ReviewForReservationResponseDto of(Reservation reservation) {
         return ReviewForReservationResponseDto.builder()
@@ -31,7 +31,7 @@ public class ReviewForReservationResponseDto {
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())
                 .guestCount(reservation.getGuestCount())
-                .usagePurpose(reservation.getUsagePurpose())
+                .usagePurpose(reservation.getUsagePurpose().getText())
                 .build();
     }
 }

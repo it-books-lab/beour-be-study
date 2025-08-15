@@ -226,9 +226,9 @@ class ReservationCalendarServiceTest {
         // then
         List<CalendarReservationResponseDto> reservations = result.getReservations();
         assertEquals(3, reservations.size()); // 삭제된 예약은 제외
-        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus() == ReservationStatus.PENDING));
-        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus() == ReservationStatus.ACCEPTED));
-        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus() == ReservationStatus.REJECTED));
+        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus().equals(ReservationStatus.PENDING.getText())));
+        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus().equals(ReservationStatus.ACCEPTED.getText())));
+        assertTrue(reservations.stream().anyMatch(dto -> dto.getStatus().equals(ReservationStatus.REJECTED.getText())));
         assertTrue(result.isLast());
         assertEquals(1, result.getTotalPage());
     }
@@ -276,7 +276,7 @@ class ReservationCalendarServiceTest {
         // then
         List<CalendarReservationResponseDto> reservations = result.getReservations();
         assertEquals(1, reservations.size());
-        assertEquals(ReservationStatus.PENDING, reservations.get(0).getStatus());
+        assertEquals(ReservationStatus.PENDING.getText(), reservations.get(0).getStatus());
         assertEquals(LocalTime.of(10, 0, 0), reservations.get(0).getStartTime());
         assertTrue(result.isLast());
         assertEquals(1, result.getTotalPage());
@@ -295,7 +295,7 @@ class ReservationCalendarServiceTest {
         // then
         List<CalendarReservationResponseDto> reservations = result.getReservations();
         assertEquals(1, reservations.size());
-        assertEquals(ReservationStatus.PENDING, reservations.get(0).getStatus());
+        assertEquals(ReservationStatus.PENDING.getText(), reservations.get(0).getStatus());
         assertEquals(space.getName(), reservations.get(0).getSpaceName());
         assertTrue(result.isLast());
         assertEquals(1, result.getTotalPage());
@@ -314,7 +314,7 @@ class ReservationCalendarServiceTest {
         // then
         List<CalendarReservationResponseDto> reservations = result.getReservations();
         assertEquals(1, reservations.size());
-        assertEquals(ReservationStatus.ACCEPTED, reservations.get(0).getStatus());
+        assertEquals(ReservationStatus.ACCEPTED.getText(), reservations.get(0).getStatus());
         assertEquals(LocalTime.of(14, 0, 0), reservations.get(0).getStartTime());
         assertTrue(result.isLast());
         assertEquals(1, result.getTotalPage());
@@ -333,7 +333,7 @@ class ReservationCalendarServiceTest {
         // then
         List<CalendarReservationResponseDto> reservations = result.getReservations();
         assertEquals(1, reservations.size());
-        assertEquals(ReservationStatus.ACCEPTED, reservations.get(0).getStatus());
+        assertEquals(ReservationStatus.ACCEPTED.getText(), reservations.get(0).getStatus());
         assertEquals(space.getName(), reservations.get(0).getSpaceName());
         assertTrue(result.isLast());
         assertEquals(1, result.getTotalPage());

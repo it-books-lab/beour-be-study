@@ -199,7 +199,7 @@ class ReviewGuestServiceTest {
         assertEquals(completedReservation.getStartTime(), result.getReservations().get(0).getStartTime());
         assertEquals(completedReservation.getEndTime(), result.getReservations().get(0).getEndTime());
         assertEquals(completedReservation.getGuestCount(), result.getReservations().get(0).getGuestCount());
-        assertEquals(completedReservation.getUsagePurpose(), result.getReservations().get(0).getUsagePurpose());
+        assertEquals(completedReservation.getUsagePurpose().getText(), result.getReservations().get(0).getUsagePurpose());
     }
 
     @Test
@@ -306,7 +306,7 @@ class ReviewGuestServiceTest {
         assertEquals(completedReservation.getStartTime(), result.getStartTime());
         assertEquals(completedReservation.getEndTime(), result.getEndTime());
         assertEquals(completedReservation.getGuestCount(), result.getGuestCount());
-        assertEquals(completedReservation.getUsagePurpose(), result.getUsagePurpose());
+        assertEquals(completedReservation.getUsagePurpose().getText(), result.getUsagePurpose());
     }
 
     @Test
