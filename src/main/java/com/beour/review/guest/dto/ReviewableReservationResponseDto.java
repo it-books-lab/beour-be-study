@@ -22,7 +22,8 @@ public class ReviewableReservationResponseDto {
     private LocalTime startTime;
     private LocalTime endTime;
     private int guestCount;
-    private UsagePurpose usagePurpose;
+    private String usagePurpose;
+    private String thumbnailUrl;
 
     public static ReviewableReservationResponseDto of(Reservation reservation) {
         return ReviewableReservationResponseDto.builder()
@@ -32,7 +33,8 @@ public class ReviewableReservationResponseDto {
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())
                 .guestCount(reservation.getGuestCount())
-                .usagePurpose(reservation.getUsagePurpose())
+                .usagePurpose(reservation.getUsagePurpose().getText())
+                .thumbnailUrl(reservation.getSpace().getThumbnailUrl())
                 .build();
     }
 }

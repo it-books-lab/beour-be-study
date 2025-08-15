@@ -391,7 +391,7 @@ class ReservationGuestServiceTest {
         assertEquals(reservationPast.getDate(), result.getReservations().get(0).getDate());
         assertEquals(reservationPast.getStartTime(), result.getReservations().get(0).getStartTime());
         assertEquals(reservationPast.getEndTime(), result.getReservations().get(0).getEndTime());
-        assertEquals(ReservationStatus.COMPLETED, result.getReservations().get(0).getStatus());
+        assertEquals(ReservationStatus.COMPLETED.getText(), result.getReservations().get(0).getStatus());
     }
 
     @Test

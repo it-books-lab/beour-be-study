@@ -229,7 +229,7 @@ class ReservationHostServiceTest {
         assertThat(reservations).hasSize(1);
         assertThat(reservations.get(0).getReservationId()).isEqualTo(acceptedReservation.getId());
         assertThat(reservations.get(0).getGuestName()).isEqualTo("게스트");
-        assertThat(reservations.get(0).getStatus()).isEqualTo(ReservationStatus.ACCEPTED);
+        assertThat(reservations.get(0).getStatus()).isEqualTo(ReservationStatus.ACCEPTED.getText());
         assertThat(reservations.get(0).getSpaceName()).isEqualTo("공간1");
         assertThat(reservations.get(0).getStartTime()).isEqualTo(LocalTime.of(14, 0, 0));
         assertThat(reservations.get(0).getEndTime()).isEqualTo(LocalTime.of(16, 0, 0));
@@ -554,7 +554,7 @@ class ReservationHostServiceTest {
         List<HostReservationListResponseDto> reservations = result.getReservations();
         assertThat(reservations).hasSize(1);
         assertThat(reservations.get(0).getReservationId()).isEqualTo(acceptedReservation.getId());
-        assertThat(reservations.get(0).getStatus()).isEqualTo(ReservationStatus.ACCEPTED);
+        assertThat(reservations.get(0).getStatus()).isEqualTo(ReservationStatus.ACCEPTED.getText());
     }
 
     @Test

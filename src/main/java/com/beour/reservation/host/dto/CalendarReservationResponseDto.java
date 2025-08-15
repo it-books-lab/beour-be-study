@@ -14,14 +14,14 @@ public class CalendarReservationResponseDto {
 
     private Long reservationId;
     private String guestName;
-    private ReservationStatus status;
+    private String status;
     private String spaceName;
     private LocalTime startTime;
     private LocalTime endTime;
     private int guestCount;
 
     @Builder
-    private CalendarReservationResponseDto(Long reservationId, String guestName, ReservationStatus status,
+    private CalendarReservationResponseDto(Long reservationId, String guestName, String status,
                                            String spaceName, LocalTime startTime, LocalTime endTime, int guestCount) {
         this.reservationId = reservationId;
         this.guestName = guestName;
@@ -36,7 +36,7 @@ public class CalendarReservationResponseDto {
         return CalendarReservationResponseDto.builder()
                 .reservationId(reservation.getId())
                 .guestName(reservation.getGuest().getName())
-                .status(reservation.getStatus())
+                .status(reservation.getStatus().getText())
                 .spaceName(reservation.getSpace().getName())
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())

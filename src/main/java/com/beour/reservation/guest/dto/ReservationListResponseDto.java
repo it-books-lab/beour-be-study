@@ -21,8 +21,8 @@ public class ReservationListResponseDto {
     private LocalTime endTime;
     private int price;
     private int guestCount;
-    private ReservationStatus status;
-    private UsagePurpose usagePurpose;
+    private String status;
+    private String usagePurpose;
     private String requestMessage;
     private Long reviewId;
     private boolean currentUsing;
@@ -31,8 +31,8 @@ public class ReservationListResponseDto {
     private ReservationListResponseDto(Long reservationId, String spaceName,
         String spaceThumbImageUrl,
         LocalDate date, LocalTime startTime, LocalTime endTime,
-        int price, int guestCount, ReservationStatus status,
-        UsagePurpose usagePurpose, String requestMessage, Long reviewId, boolean currentUsing) {
+        int price, int guestCount, String status,
+        String usagePurpose, String requestMessage, Long reviewId, boolean currentUsing) {
         this.reservationId = reservationId;
         this.spaceName = spaceName;
         this.spaceThumbImageUrl = spaceThumbImageUrl;
@@ -58,8 +58,8 @@ public class ReservationListResponseDto {
             .endTime(reservation.getEndTime())
             .price(reservation.getPrice())
             .guestCount(reservation.getGuestCount())
-            .status(reservation.getStatus())
-            .usagePurpose(reservation.getUsagePurpose())
+            .status(reservation.getStatus().getText())
+            .usagePurpose(reservation.getUsagePurpose().getText())
             .requestMessage(reservation.getRequestMessage())
             .currentUsing(isCurrentUsing(reservation))
             .build();
@@ -75,8 +75,8 @@ public class ReservationListResponseDto {
             .endTime(reservation.getEndTime())
             .price(reservation.getPrice())
             .guestCount(reservation.getGuestCount())
-            .status(reservation.getStatus())
-            .usagePurpose(reservation.getUsagePurpose())
+            .status(reservation.getStatus().getText())
+            .usagePurpose(reservation.getUsagePurpose().getText())
             .requestMessage(reservation.getRequestMessage())
             .reviewId(reviewId)
             .build();
