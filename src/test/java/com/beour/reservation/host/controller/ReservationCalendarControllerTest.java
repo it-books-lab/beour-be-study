@@ -284,7 +284,7 @@ class ReservationCalendarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.reservations").isArray())
                 .andExpect(jsonPath("$.data.reservations.length()").value(1))
-                .andExpect(jsonPath("$.data.reservations[0].status").value("PENDING"))
+                .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.PENDING.getText()))
                 .andExpect(jsonPath("$.data.reservations[0].guestName").value("게스트"));
     }
 
@@ -299,7 +299,7 @@ class ReservationCalendarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.reservations").isArray())
                 .andExpect(jsonPath("$.data.reservations.length()").value(1))
-                .andExpect(jsonPath("$.data.reservations[0].status").value("ACCEPTED"))
+                .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.ACCEPTED.getText()))
                 .andExpect(jsonPath("$.data.reservations[0].guestName").value("게스트"));
     }
 
@@ -315,7 +315,7 @@ class ReservationCalendarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.reservations").isArray())
                 .andExpect(jsonPath("$.data.reservations.length()").value(1))
-                .andExpect(jsonPath("$.data.reservations[0].status").value("PENDING"));
+                .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.PENDING.getText()));
     }
 
     @Test
