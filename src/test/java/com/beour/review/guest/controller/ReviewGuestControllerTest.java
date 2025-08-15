@@ -181,7 +181,7 @@ class ReviewGuestControllerTest {
                 .andExpect(jsonPath("$.data.reservations[0].spaceName").value(space.getName()))
                 .andExpect(jsonPath("$.data.reservations[0].date").value(completedReservation.getDate().toString()))
                 .andExpect(jsonPath("$.data.reservations[0].guestCount").value(2))
-                .andExpect(jsonPath("$.data.reservations[0].usagePurpose").value("BARISTA_TRAINING"))
+                .andExpect(jsonPath("$.data.reservations[0].usagePurpose").value(UsagePurpose.BARISTA_TRAINING.getText()))
                 .andExpect(jsonPath("$.data.last").exists())
                 .andExpect(jsonPath("$.data.totalPage").exists());
     }
