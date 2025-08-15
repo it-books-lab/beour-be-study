@@ -583,7 +583,7 @@ class ReservationGuestControllerTest {
                 .header("Authorization", "Bearer " + accessToken)
             )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.data.reservations[0].status").value("COMPLETED"));
+            .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.COMPLETED.getText()));
     }
 
     @Test
@@ -683,7 +683,7 @@ class ReservationGuestControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.data.reservations[0].reservationId").value(reservation.getId()))
             .andExpect(jsonPath("$.data.reservations[0].spaceName").value(space.getName()))
-            .andExpect(jsonPath("$.data.reservations[0].status").value("REJECTED"))
+            .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.REJECTED.getText()))
         ;
     }
 

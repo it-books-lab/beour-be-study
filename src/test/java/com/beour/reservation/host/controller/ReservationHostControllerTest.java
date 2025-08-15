@@ -224,7 +224,7 @@ class ReservationHostControllerTest {
                 .andExpect(jsonPath("$.data.reservations.length()").value(2))
                 .andExpect(jsonPath("$.data.reservations[0].reservationId").value(reservation1.getId()))
                 .andExpect(jsonPath("$.data.reservations[0].guestName").value("게스트"))
-                .andExpect(jsonPath("$.data.reservations[0].status").value("ACCEPTED"))
+                .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.ACCEPTED.getText()))
                 .andExpect(jsonPath("$.data.reservations[0].spaceName").value("공간1"))
                 .andExpect(jsonPath("$.data.reservations[0].startTime").value("10:00:00"))
                 .andExpect(jsonPath("$.data.reservations[0].endTime").value("12:00:00"))
@@ -328,7 +328,7 @@ class ReservationHostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.reservations.length()").value(1))
                 .andExpect(jsonPath("$.data.reservations[0].reservationId").value(acceptedReservation.getId()))
-                .andExpect(jsonPath("$.data.reservations[0].status").value("ACCEPTED"));
+                .andExpect(jsonPath("$.data.reservations[0].status").value(ReservationStatus.ACCEPTED.getText()));
     }
 
     @Test
