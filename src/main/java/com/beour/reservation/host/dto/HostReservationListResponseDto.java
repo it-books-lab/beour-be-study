@@ -15,7 +15,7 @@ public class HostReservationListResponseDto {
 
     private Long reservationId;
     private String guestName;
-    private ReservationStatus status;
+    private String status;
     private String spaceName;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -23,7 +23,7 @@ public class HostReservationListResponseDto {
     private boolean isCurrentlyInUse;
 
     @Builder
-    private HostReservationListResponseDto(Long reservationId, String guestName, ReservationStatus status,
+    private HostReservationListResponseDto(Long reservationId, String guestName, String status,
                                            String spaceName, LocalTime startTime, LocalTime endTime,
                                            int guestCount, boolean isCurrentlyInUse) {
         this.reservationId = reservationId;
@@ -40,7 +40,7 @@ public class HostReservationListResponseDto {
         return HostReservationListResponseDto.builder()
                 .reservationId(reservation.getId())
                 .guestName(reservation.getGuest().getName())
-                .status(reservation.getStatus())
+                .status(reservation.getStatus().getText())
                 .spaceName(reservation.getSpace().getName())
                 .startTime(reservation.getStartTime())
                 .endTime(reservation.getEndTime())
