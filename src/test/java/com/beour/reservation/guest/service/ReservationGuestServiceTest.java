@@ -175,7 +175,7 @@ class ReservationGuestServiceTest {
         //given
         int currentHour = LocalTime.now().getHour();
         ReservationCreateRequest request = new ReservationCreateRequest(LocalDate.now(), LocalTime.of(currentHour - 1, 0, 0),
-            LocalTime.of(currentHour + 1, 0, 0), 30000, 2,
+            LocalTime.of((currentHour + 1) % 24, 0, 0), 30000, 2,
             UsagePurpose.BARISTA_TRAINING, "테슽뚜");
 
         //when  then
@@ -317,8 +317,8 @@ class ReservationGuestServiceTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime - 3, 0, 0))
-            .endTime(LocalTime.of(currentTime - 1, 0, 0))
+            .startTime(LocalTime.of((currentTime - 3 + 24) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime - 1 + 24) % 24, 0, 0))
             .price(30000)
             .guestCount(2)
             .build();
@@ -331,8 +331,8 @@ class ReservationGuestServiceTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime + 1, 0, 0))
-            .endTime(LocalTime.of(currentTime + 2, 0, 0))
+            .startTime(LocalTime.of((currentTime + 1) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime + 2) % 24, 0, 0))
             .price(15000)
             .guestCount(2)
             .build();

@@ -575,8 +575,8 @@ class ReservationHostServiceTest {
                     .usagePurpose(UsagePurpose.BARISTA_TRAINING)
                     .requestMessage("예약 " + (i + 1))
                     .date(targetDate)
-                    .startTime(LocalTime.of(10 + i, 0, 0))
-                    .endTime(LocalTime.of(12 + i, 0, 0))
+                    .startTime(LocalTime.of((10 + i) % 24, 0, 0))
+                    .endTime(LocalTime.of((12 + i) % 24, 0, 0))
                     .price(30000)
                     .guestCount(2)
                     .build();
@@ -610,8 +610,8 @@ class ReservationHostServiceTest {
                     .usagePurpose(UsagePurpose.BARISTA_TRAINING)
                     .requestMessage("예약 " + (i + 1))
                     .date(targetDate)
-                    .startTime(LocalTime.of(10 + i, 0, 0))
-                    .endTime(LocalTime.of(12 + i, 0, 0))
+                    .startTime(LocalTime.of((10 + i) % 24, 0, 0))
+                    .endTime(LocalTime.of((12 + i) % 24, 0, 0))
                     .price(30000)
                     .guestCount(2)
                     .build();
