@@ -22,6 +22,7 @@ public class ReviewForReservationResponseDto {
     private LocalTime endTime;
     private int guestCount;
     private String usagePurpose;
+    private String thumbnailUrl;
 
     public static ReviewForReservationResponseDto of(Reservation reservation) {
         return ReviewForReservationResponseDto.builder()
@@ -32,6 +33,7 @@ public class ReviewForReservationResponseDto {
                 .endTime(reservation.getEndTime())
                 .guestCount(reservation.getGuestCount())
                 .usagePurpose(reservation.getUsagePurpose().getText())
+                .thumbnailUrl(reservation.getSpace().getThumbnailUrl())
                 .build();
     }
 }
