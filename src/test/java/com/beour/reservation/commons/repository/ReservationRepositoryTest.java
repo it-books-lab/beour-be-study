@@ -232,8 +232,8 @@ class ReservationRepositoryTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime - 1, 0, 0))
-            .endTime(LocalTime.of(currentTime + 1, 0, 0))
+            .startTime(LocalTime.of((currentTime - 1 + 24) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime + 1) % 24, 0, 0))
             .price(30000)
             .guestCount(2)
             .build();
@@ -247,8 +247,8 @@ class ReservationRepositoryTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime + 1, 0, 0))
-            .endTime(LocalTime.of(currentTime + 2, 0, 0))
+            .startTime(LocalTime.of((currentTime + 1) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime + 2) % 24, 0, 0))
             .price(15000)
             .guestCount(2)
             .build();
@@ -282,8 +282,8 @@ class ReservationRepositoryTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime - 3, 0, 0))
-            .endTime(LocalTime.of(currentTime - 1, 0, 0))
+            .startTime(LocalTime.of((currentTime - 3 + 24) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime - 1 + 24) % 24, 0, 0))
             .price(30000)
             .guestCount(2)
             .build();
@@ -297,8 +297,8 @@ class ReservationRepositoryTest {
             .usagePurpose(UsagePurpose.BARISTA_TRAINING)
             .requestMessage("테슽뚜")
             .date(LocalDate.now())
-            .startTime(LocalTime.of(currentTime + 1, 0, 0))
-            .endTime(LocalTime.of(currentTime + 2, 0, 0))
+            .startTime(LocalTime.of((currentTime + 1) % 24, 0, 0))
+            .endTime(LocalTime.of((currentTime + 2) % 24, 0, 0))
             .price(15000)
             .guestCount(2)
             .build();
