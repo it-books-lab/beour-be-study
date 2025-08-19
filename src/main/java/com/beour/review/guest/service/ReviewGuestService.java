@@ -55,8 +55,9 @@ public class ReviewGuestService {
     public ReviewableReservationPageResponseDto getReviewableReservations(Pageable pageable) {
         User guest = findUserFromToken();
 
+        // 완료된 예약 + 이미 해당 예약에 리뷰가 작성되어 있는 지 확인
         Page<Reservation> completedReservations = reservationRepository
-                .findCompletedReservationsByGuestId(guest.getId(), pageable);
+                .findReviewableReservationsByGuestId(guest.getId(), pageable);
 
         checkEmptyReservation(completedReservations);
 
