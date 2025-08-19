@@ -170,8 +170,11 @@ class ReviewGuestControllerTest {
     }
 
     @Test
-    @DisplayName("리뷰 가능한 예약 조회 - 성공 (페이징)")
-    void getReviewableReservations_success() throws Exception {
+    @DisplayName("리뷰 가능한 예약 조회 - 성공 (리뷰 없는 예약 반환)")
+    void getReviewableReservations_success_withoutReview() throws Exception {
+        // given: 리뷰 없는 예약만 세팅 (review 저장 X)
+        reviewRepository.deleteAll(); // setUp에서 저장한 리뷰 제거
+
         mockMvc.perform(get("/api/users/me/reviewable-reservations")
                         .param("page", "0")
                         .param("size", "10")
@@ -182,6 +185,19 @@ class ReviewGuestControllerTest {
                 .andExpect(jsonPath("$.data.reservations[0].date").value(completedReservation.getDate().toString()))
                 .andExpect(jsonPath("$.data.reservations[0].guestCount").value(2))
                 .andExpect(jsonPath("$.data.reservations[0].usagePurpose").value(UsagePurpose.BARISTA_TRAINING.getText()))
+                .andExpect(jsonPath("$.data.last").exists())
+                .andExpect(jsonPath("$.data.totalPage").exists());
+    }
+
+    @Test
+    @DisplayName("리뷰 가능한 예약 조회 - 성공 (리뷰가 있으면 제외)")
+    void getReviewableReservations_success_withReviewExcluded() throws Exception {
+        mockMvc.perform(get("/api/users/me/reviewable-reservations")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .header("Authorization", "Bearer " + accessToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.reservations").isEmpty())
                 .andExpect(jsonPath("$.data.last").exists())
                 .andExpect(jsonPath("$.data.totalPage").exists());
     }

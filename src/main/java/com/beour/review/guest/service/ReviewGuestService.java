@@ -59,8 +59,6 @@ public class ReviewGuestService {
         Page<Reservation> completedReservations = reservationRepository
                 .findReviewableReservationsByGuestId(guest.getId(), pageable);
 
-        checkEmptyReservation(completedReservations);
-
         List<ReviewableReservationResponseDto> reservations = completedReservations.getContent().stream()
                 .map(ReviewableReservationResponseDto::of)
                 .toList();
@@ -262,12 +260,6 @@ public class ReviewGuestService {
         List<ReviewImage> existingImages = review.getImages();
         if (existingImages != null) {
             review.getImages().clear();
-        }
-    }
-
-    private void checkEmptyReservation(Page<Reservation> reservations) {
-        if (reservations.isEmpty()) {
-            throw new ReservationNotFound(ReservationErrorCode.RESERVATION_NOT_FOUND);
         }
     }
 
