@@ -46,8 +46,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     WHERE r.guest.id = :guestId 
     AND r.status = 'COMPLETED'
     AND r.deletedAt IS NULL
+    AND NOT EXISTS (
+        SELECT rev FROM Review rev
+        WHERE rev.reservation = r
+    )
     """)
-    Page<Reservation> findCompletedReservationsByGuestId(@Param("guestId") Long guestId, Pageable pageable);
+    Page<Reservation> findReviewableReservationsByGuestId(@Param("guestId") Long guestId, Pageable pageable);
 
     @Query("SELECT r FROM Reservation r JOIN FETCH r.space WHERE r.guest.id = :guestId AND r.status = 'COMPLETED' AND r.deletedAt IS NULL")
     List<Reservation> findCompletedReservationsWithSpaceByGuestId(@Param("guestId") Long guestId);

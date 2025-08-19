@@ -245,9 +245,15 @@ class ReviewCommentHostServiceTest {
 
         Pageable pageable = PageRequest.of(0, 10);
 
-        // when & then
-        assertThrows(IllegalStateException.class,
-                () -> reviewCommentHostService.getCommentableReviews(pageable));
+        // when
+        ReviewCommentablePageResponseDto result = reviewCommentHostService.getCommentableReviews(pageable);
+
+        // then
+        assertNotNull(result);
+        assertTrue(result.getReviews().isEmpty(), "대댓글 가능한 리뷰가 없으면 빈 리스트를 반환");
+        // 페이징 정보도 확인 가능
+        assertEquals(0, result.getTotalPage());
+        assertTrue(result.isLast());
     }
 
     @Test

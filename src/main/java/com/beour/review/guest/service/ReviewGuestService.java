@@ -55,10 +55,9 @@ public class ReviewGuestService {
     public ReviewableReservationPageResponseDto getReviewableReservations(Pageable pageable) {
         User guest = findUserFromToken();
 
+        // 완료된 예약 + 이미 해당 예약에 리뷰가 작성되어 있는 지 확인
         Page<Reservation> completedReservations = reservationRepository
-                .findCompletedReservationsByGuestId(guest.getId(), pageable);
-
-        checkEmptyReservation(completedReservations);
+                .findReviewableReservationsByGuestId(guest.getId(), pageable);
 
         List<ReviewableReservationResponseDto> reservations = completedReservations.getContent().stream()
                 .map(ReviewableReservationResponseDto::of)
@@ -261,12 +260,6 @@ public class ReviewGuestService {
         List<ReviewImage> existingImages = review.getImages();
         if (existingImages != null) {
             review.getImages().clear();
-        }
-    }
-
-    private void checkEmptyReservation(Page<Reservation> reservations) {
-        if (reservations.isEmpty()) {
-            throw new ReservationNotFound(ReservationErrorCode.RESERVATION_NOT_FOUND);
         }
     }
 
