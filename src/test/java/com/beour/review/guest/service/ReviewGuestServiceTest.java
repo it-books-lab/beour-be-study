@@ -209,9 +209,14 @@ class ReviewGuestServiceTest {
         // 완료된 예약 삭제
         reservationRepository.delete(completedReservation);
 
-        //when then
-        assertThrows(ReservationNotFound.class,
-                () -> reviewGuestService.getReviewableReservations(pageable));
+        // when
+        ReviewableReservationPageResponseDto result = reviewGuestService.getReviewableReservations(pageable);
+
+        // then
+        assertNotNull(result);
+        assertTrue(result.getReservations().isEmpty(), "리뷰 가능한 예약이 없으면 빈 리스트를 반환");
+        assertEquals(0, result.getTotalPage());
+        assertTrue(result.isLast());
     }
 
     @Test

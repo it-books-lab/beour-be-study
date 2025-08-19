@@ -45,10 +45,6 @@ public class ReviewCommentHostService {
 
         Page<Review> commentableReviewsPage = reviewRepository.findCommentableReviewsByHostId(host.getId(), pageable);
 
-        if (commentableReviewsPage.isEmpty()) {
-            throw new IllegalStateException("답글을 작성할 수 있는 리뷰가 없습니다.");
-        }
-
         List<ReviewCommentableResponseDto> reviews = commentableReviewsPage.getContent()
                 .stream()
                 .map(ReviewCommentableResponseDto::of)
